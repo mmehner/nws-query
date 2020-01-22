@@ -28,7 +28,8 @@
     (if (file-exists-p (concat nws-local "/NWS_" nws-searchstr))
 	(progn
 	  (find-file-read-only-other-frame (concat nws-local "/NWS_" nws-searchstr))
-	  (nws-redisplay))
+	  (nws-redisplay)
+	  (local-set-key (kbd "q") 'delete-frame))
       (message "Searchstring is not in the local querylog."))
     ))
 
@@ -83,14 +84,14 @@
     (unless (search-forward "Keine Suchergebnisse." nil t 3)
       (goto-char (point-min))
       (cond
-       ;; save query there isn't a file already
+       ;; save query if there isn't a file already
        ((not (file-exists-p (concat nws-local "NWS_" nws-searchstr)))
 	(write-region (search-forward "Nachtragswörterbuch des Sanskrit" nil t) (point-max) (concat nws-local "/NWS_" nws-searchstr) nil nil nil))
        ;; if there is, only overwrite if the current file is older than 100 days
        ((< 8640000 (string-to-number (format-time-string "%s" (time-subtract (current-time) (file-attribute-modification-time (file-attributes (concat nws-local "/NWS_" nws-searchstr)))))))
 	(write-region (search-forward "Nachtragswörterbuch des Sanskrit" nil t) (point-max) (concat nws-local "/NWS_" nws-searchstr) nil nil nil))
        ((not nil)
-	(message "Query was already saved locally."))
+	(message "Query has already been saved locally less than 100 days ago."))
        ))))
 
 (defun nws-redisplay ()

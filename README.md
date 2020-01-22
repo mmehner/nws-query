@@ -1,15 +1,15 @@
 # nws-query
-query [Nachtragswörterbuch des Sanskrit (NWS)](https://nws.uzi.uni-halle.de/) with Emacs and keep a slim backlog of your queries on your local machine.
+query [Nachtragswörterbuch des Sanskrit (NWS)](https://nws.uzi.uni-halle.de/) with Emacs and keep a slim backlog of your queries locally.
 
 ## Dependencies
 - w3m
-- [emacs-w3m](https://melpa.org/#/w3m) (available on MELPA)
+- emacs-w3m (available on [MELPA](https://melpa.org/#/w3m))
 
 ## Installation
 1. Add `nws-query.el` to a directory included in the list `load-path` or modify this list to include the directory with
    `(add-to-list 'load-path "/PATH/TO/nws-query/")` in your init file,
 2. add `(require 'nws-search)` to your init-file,
-3. (optional) if you wish to keep a local backlog of your queries, set the variable `nws-local` to the directory you wish to keep your backlog in, e.g. `(setq nws-search "~/dictionaries/nws")`.
+3. (optional) if you wish to keep a local backlog of your queries, set the variable `nws-local` to the directory you wish to keep your backlog in, e.g. `(setq nws-local "~/dictionaries/nws")`.
 
 ## Usage
 1. Evaluate the main provided function with `M-x nws-search`, browse the opening dictionary frame with w3m-keybindings, close by pressing `q`,
