@@ -14,4 +14,5 @@ query [Nachtragswörterbuch des Sanskrit (NWS)](https://nws.uzi.uni-halle.de/) w
 ## Usage
 1. Evaluate the main provided function with `M-x nws-search`, browse the opening dictionary frame with w3m-keybindings, close by pressing `q`,
 2. if the online service is not accessible you can search your past queries with `M-x nws-search-local`, provided you have set the variable `nws-local` before,
-3. (optional) if you are frequently using this function, consider [creating a keybinding](https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Commands.html).
+3. if you want to systematically scrape for offline searching, you can use `M-x nws-scrape` within the directory providing this function (it takes a while but recognizes previously saved queries),
+4. (optional) if you are frequently using one or the other function, consider [creating a keybinding](https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Commands.html).
