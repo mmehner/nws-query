@@ -18,9 +18,9 @@
   (interactive (list (nws-get-searchstr)))
   (if (eq nws-local "")
       (message "Variable 'nws-local' is not set.")
-    (if (file-exists-p (concat nws-local "/NWS_" searchstr))
+    (if (file-exists-p (concat nws-local "NWS_" searchstr))
 	(progn
-	  (find-file-read-only-other-frame (concat nws-local "/NWS_" searchstr))
+	  (find-file-read-only-other-frame (concat nws-local "NWS_" searchstr))
 	  (nws-redisplay)
 	  (local-set-key (kbd "q") 'delete-frame))
       (message "Searchstring is not in the local querylog."))
@@ -53,23 +53,6 @@
     (read-string "Search string (IAST or HK): " nil nil nil t)
     )))
 
-(defun nws-scrape ()
-  ""
-  (interactive)
-  (unless (eq nws-local "")
-    (if (not (file-exists-p (concat default-directory "index_pw-PW_sorted_uniq.txt")))
-	(message "Can't find index. Please cd into directory providing the package query-nws.el")
-    (mapc (lambda (lemma)
-	    ;; skip if already existing
-	    (unless (file-exists-p (concat nws-local "/NWS_" lemma))
-	      (w3m-browse-url (concat "https://nws.uzi.uni-halle.de/search?utf8=✓&q=" lemma "&m=&t=&d=&type=&ntype=&cat=&ncat=&c=&v=&merge=on") t)
-	      (sleep-for (random 2) (random 100))
-	      (kill-this-buffer)
-	    ))
-	  (split-string 
-	   (nws-get-headwords "index_pw-PW_sorted_uniq.txt") "\n" t)
-	  ))))
-
 (defun nws-get-headwords (f)
   (with-temp-buffer
     (insert-file-contents f)
@@ -101,11 +84,11 @@
       (goto-char (point-min))
       (cond
        ;; save query if there isn't a file already
-       ((not (file-exists-p (concat nws-local "/" (buffer-name))))
-	(write-region (search-forward "Nachtragswörterbuch des Sanskrit" nil t) (point-max) (concat nws-local "/" (buffer-name)) nil nil nil))
+       ((not (file-exists-p (concat nws-local (buffer-name))))
+	(write-region (search-forward "Nachtragswörterbuch des Sanskrit" nil t) (point-max) (concat nws-local (buffer-name)) nil nil nil))
        ;; if there is, only overwrite if the current file is older than 100 days
-       ((< 8640000 (string-to-number (format-time-string "%s" (time-subtract (current-time) (file-attribute-modification-time (file-attributes (concat nws-local "/" (buffer-name))))))))
-	(write-region (search-forward "Nachtragswörterbuch des Sanskrit" nil t) (point-max) (concat nws-local "/" (buffer-name)) nil nil nil))
+       ((< 8640000 (string-to-number (format-time-string "%s" (time-subtract (current-time) (file-attribute-modification-time (file-attributes (concat nws-local (buffer-name))))))))
+	(write-region (search-forward "Nachtragswörterbuch des Sanskrit" nil t) (point-max) (concat nws-local (buffer-name)) nil nil nil))
        (t
 	(message "Query has already been saved locally less than 100 days ago."))
        ))))
