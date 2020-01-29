@@ -8277,12 +8277,12 @@ antaHsAra
 antaHsattva
 antaHsattvA
 antaHsmita
-anta[H]snehaphalA
+antaHsnehaphalA
 antaHspandya
 antaHsparza
 antaHstha
-anta[H]sthAcchandas
-anta[H]sthIbhAva
+antaHsthAcchandas
+antaHsthIbhAva
 antaHstobha
 antaHstomabhAgam
 antaHsukha
@@ -8347,7 +8347,7 @@ antarAlavrata
 antarAlI
 antarAMsa
 antaraNa
-antaranta[H]stha
+antarantaHstha
 antarAnveSin
 antarApaNa
 antarApatyA
@@ -19306,7 +19306,7 @@ baindavIya
 baiSka
 baitAlin
 baja
-bAjabAh[A]duracandra
+bAjabAhAduracandra
 baka
 bAka
 bakabakAy
@@ -20004,7 +20004,7 @@ bastagandhA
 bastagandhAkRti
 bastAjina
 bastakarNa
-bastamAra[m]
+bastamAram
 bastAmbu
 bastamodA
 bastAntrI
@@ -30719,7 +30719,7 @@ dhanuHkhaNDa
 dhanuHkhAtA
 dhanuHpaTa
 dhanuHsaMstha
-dhanu[H]stambha
+dhanuHstambha
 dhanuHstambha
 dhanuHzAkhA
 dhanuHzAlA
@@ -33954,7 +33954,7 @@ duHSparza
 duHsparzaka
 duHsphoTa
 duHspRSTa
-du[H]spRza
+duHspRza
 duHspRza
 duHstha
 duHstheya
@@ -67222,7 +67222,7 @@ mitavAc
 mitAzana
 mitazAyin
 mith
-mitha[H]spRdhya
+mithaHspRdhya
 mithas
 mithaspRdhya
 mithastur
@@ -69183,7 +69183,7 @@ nabhaHsenA
 nabhaHsindhu
 nabhaHspRz
 nabhaHsthala
-nabha[H]sthalI
+nabhaHsthalI
 nabhaHsthita
 nabhaHzabdamaya
 nabhaHzrit
@@ -72055,11 +72055,11 @@ niHsparza
 niHspRha
 niHsrava
 niHsrAva
-ni[H]stambha
+niHstambha
 niHstambha
 niHSTha
 niHsthAman
-ni[H]stuti
+niHstuti
 niHstuti
 niHsukha
 niHsUnu
@@ -88050,9 +88050,9 @@ punaHsaMskAra
 punaHsaMskRta
 punaHsara
 punaHsiddha
-puna[H]stoma
 punaHstoma
-puna[H]stuti
+punaHstoma
+punaHstuti
 punaHsukha
 punar
 punarAbhAva
@@ -128231,7 +128231,7 @@ vinighna
 vinigraha
 vinigrAhya
 vinigUhitar
-vini[H]sRptAhuti
+viniHsRptAhuti
 viniHsRti
 vinikAra
 vinikarttavya

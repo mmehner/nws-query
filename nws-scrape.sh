@@ -18,7 +18,6 @@ do
 	     count=$((count + 1))
 	     sleep 1
 	 done
-	 sleep 1
 	 echo "… saved."
     fi 
 done < index_pw-PW_sorted_uniq.txt
