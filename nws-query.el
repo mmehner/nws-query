@@ -1,30 +1,40 @@
 (provide 'nws-query)
 
-(defvar nws-local ""
+(defvar nwslocal ""
   "Variable for a path under which to save nws-search queries; set in your init-file to the path you wish to keep a backlog in order enable local saving and offline searching.")
 
-(defun nws-search (searchstr)
+(defun nws-query (searchstr)
   "query the nws"
   (interactive (list (nws-get-searchstr)))
 
-  (cond ((get-buffer (concat "NWS_" searchstr))
-	 (display-buffer-pop-up-frame (concat "NWS_" searchstr) nil))
-	(t (let ((w3m-pop-up-frames t))
-	     (w3m-browse-url (concat "https://nws.uzi.uni-halle.de/search?utf8=✓&q=" searchstr "&m=&t=&d=&type=&ntype=&cat=&ncat=&c=&v=&merge=on") t)))
-	))
+  (if (get-buffer (concat "NWS_" searchstr))
+      (display-buffer-pop-up-frame (concat "NWS_" searchstr) nil)
+    (if (eq nwslocal "")
+	(progn
+	  (message "Variable 'nwslocal' is not set, defaulting to online search.")
+	  (nws-search-online searchstr))
+      (if (file-exists-p (concat nwslocal "NWS_" searchstr))
+	  (nws-search-local searchstr)
+	(message "Searchstring is not in the local querylog, searching online.")
+	(nws-search-online searchstr)
+      )
+    )
+  )
+)
+  
+(defun nws-search-online (searchstr)
+  (interactive (list (nws-get-searchstr)))
+  (let ((w3m-pop-up-frames t))
+    (w3m-browse-url (concat "https://nws.uzi.uni-halle.de/search?utf8=✓&q=" searchstr "&m=&t=&d=&type=&ntype=&cat=&ncat=&c=&v=&merge=on") t))
+  )
 
 (defun nws-search-local (searchstr)
   "query your local backlog"
   (interactive (list (nws-get-searchstr)))
-  (if (eq nws-local "")
-      (message "Variable 'nws-local' is not set.")
-    (if (file-exists-p (concat nws-local "NWS_" searchstr))
-	(progn
-	  (find-file-read-only-other-frame (concat nws-local "NWS_" searchstr))
-	  (nws-redisplay)
-	  (local-set-key (kbd "q") 'delete-frame))
-      (message "Searchstring is not in the local querylog."))
-    ))
+  (find-file-read-only-other-frame (concat nwslocal "NWS_" searchstr))
+  (nws-redisplay)
+  (local-set-key (kbd "q") 'delete-frame)
+  )
 
 (defun nws-get-searchstr ()
   (seq-reduce
@@ -65,8 +75,7 @@
   ""
   (when (string-match "nws.uzi.uni-halle.de/search" url)
     (nws-rename url)
-    (unless (eq nws-local "")
-      (nws-save))
+    (nws-save)
     (nws-redisplay)
     )
   )
@@ -77,24 +86,23 @@
   "called by nws/w3m-post-display when searching nws, renames buffer for comparison"
   (rename-buffer (concat "NWS_" (substring (substring-no-properties url (string-match "&q=" url) (string-match "&m=&" url)) 3)) t))
 
-(defun nws-save ()
-  "called by w3m-display-hook when searching nws, saves relevant region locally as a text file, unless there are no results or a recent file is already existing"
-  (save-excursion
-    (unless (search-forward "Keine Suchergebnisse." nil t 3)
-      (goto-char (point-min))
-      (cond
-       ;; save query if there isn't a file already
-       ((not (file-exists-p (concat nws-local (buffer-name))))
-	(write-region (search-forward "Nachtragswörterbuch des Sanskrit" nil t) (point-max) (concat nws-local (buffer-name)) nil nil nil))
-       ;; if there is, only overwrite if the current file is older than 100 days
-       ((< 8640000 (string-to-number (format-time-string "%s" (time-subtract (current-time) (file-attribute-modification-time (file-attributes (concat nws-local (buffer-name))))))))
-	(write-region (search-forward "Nachtragswörterbuch des Sanskrit" nil t) (point-max) (concat nws-local (buffer-name)) nil nil nil))
-       (t
-	(message "Query has already been saved locally less than 100 days ago."))
-       ))))
-
 (defun nws-redisplay ()
   "called by w3m-display-hook when searching nws, jumps to the main entry and centers view"
   (goto-char (point-min))
   (re-search-forward "^pw" nil t)
-  (recenter-top-bottom))
+  (recenter-top-bottom)
+  )
+
+(defun nws-save ()
+  ""
+  (unless (or (eq nwslocal "")
+	     (string-match "\*" (buffer-name))
+	     (string-match "\?" (buffer-name))
+	     (search-forward "Keine Suchergebnisse." nil t 3))
+      (save-excursion
+	(goto-char (point-min))
+	(write-region (re-search-forward "^NWS" nil t) (point-max) (concat nwslocal (buffer-name)) nil nil nil)
+	(write-region (concat (substring-no-properties (buffer-name) 4) "\n") nil (concat nwslocal "new_headlines") 'append)
+	)
+    )
+  )
