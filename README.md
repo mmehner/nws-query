@@ -1,5 +1,5 @@
 # nws-query
-query [Nachtragswörterbuch des Sanskrit (NWS)](https://nws.uzi.uni-halle.de/) with Emacs and/or Terminal and save your queries locally.
+query [Nachtragswörterbuch des Sanskrit (NWS)](https://nws.uzi.uni-halle.de/) with Emacs and/or terminal and save your queries locally.
 
 ## Dependencies
 - w3m
@@ -23,7 +23,7 @@ query [Nachtragswörterbuch des Sanskrit (NWS)](https://nws.uzi.uni-halle.de/) w
 
 ### Emacs
 1. Evaluate the main provided function with `M-x nws-query`, browse the opening dictionary frame, close by pressing `q`,
-2. (optional) if you are frequently using one or the other function, consider [creating a keybinding](https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Commands.html).
+2. (optional) if you are frequently using this function, consider [creating a keybinding](https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Commands.html).
 
 ### Shell (Bash)
 1. Execute `nws-query.sh` with the search term in Harvad-Kyoto as the first argument.
