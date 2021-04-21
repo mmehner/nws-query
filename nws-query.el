@@ -98,7 +98,8 @@
   (unless (or (eq nwslocal "")
 	     (string-match "\*" (buffer-name))
 	     (string-match "\?" (buffer-name))
-	     (search-forward "Keine Suchergebnisse." nil t 3))
+	     (search-forward "Keine Suchergebnisse." nil t 3)
+	     (search-forward "Cannot retrieve URL:" nil t))
       (save-excursion
 	(goto-char (point-min))
 	(write-region (re-search-forward "^NWS" nil t) (point-max) (concat nwslocal (buffer-name)) nil nil nil)
