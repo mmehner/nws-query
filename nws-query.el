@@ -103,7 +103,7 @@
       (save-excursion
 	(goto-char (point-min))
 	(write-region (re-search-forward "^NWS" nil t) (point-max) (concat nwslocal (buffer-name)) nil nil nil)
-	(write-region (concat (substring-no-properties (buffer-name) 4) "\n") nil (concat nwslocal "new_headlines") 'append)
+	(write-region (concat (substring-no-properties (buffer-name) 4) "\n") nil (concat nwslocal "new_lemmas") 'append)
 	)
     )
   )
