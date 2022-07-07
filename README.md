@@ -28,4 +28,4 @@ query [Nachtragswörterbuch des Sanskrit (NWS)](https://nws.uzi.uni-halle.de/) w
 
 ### Shell (Bash)
 1. Execute `nws-query.sh` with the search term in Harvad-Kyoto as the first argument.
-2. To perform fuzzy search on your local database execute `nws-fuzzy.sh`
+2. In order to perform fuzzy search on your local database execute `nws-fuzzy.sh`.

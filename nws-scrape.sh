@@ -28,8 +28,10 @@ done < "${__dir}"/index_pw-PW_sorted_uniq.txt
 
 if [ "$(find "${1}" -type f -empty)" ]
 then
-    echo "Permanently failed requests, remove empty files and rerun at a later time:"
+    echo "Permanently failed requests, removing empty files:"
     find "${1}" -type f -empty
+    find "${1}" -type f -empty -delete
+    echo "Please re-run at a later time."
 else
     echo "All done!"
 fi
