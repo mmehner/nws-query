@@ -12,7 +12,7 @@ query [Nachtragswörterbuch des Sanskrit (NWS)](https://nws.uzi.uni-halle.de/) w
 1. Add `nws-query.el` to a directory included in the list `load-path` or modify this list to include the directory with
    `(add-to-list 'load-path "/PATH/TO/nws-query/")` in your init file,
 2. add `(require 'nws-query)` to your init-file,
-3. (optional) if you wish to use a local database and keep a backlog of your queries, set the variable `nwslocal` to a directory with `(setq nws-local "PATH/TO/nws/")` somewhere in your config-file.
+3. (optional) if you wish to use a local database and keep a backlog of your queries, set the variable `nwslocal` to a directory with `(setq nwslocal "PATH/TO/nws/")` somewhere in your config-file.
 
 ### Shell (Bash)
 1. (Optional) set the environmental variable `nwslocal` to the directory holding your local database by adding `export nwslocal="/PATH/TO/NWS/"` to a file that is sourced by bash at startup, most commonly `.bashrc` in your home directory.
